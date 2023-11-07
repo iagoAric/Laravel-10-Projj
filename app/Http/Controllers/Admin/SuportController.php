@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateSuportRequest;
 use App\Models\Support;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 
 class SuportController extends Controller
@@ -32,7 +33,7 @@ class SuportController extends Controller
 
     public function store(StoreUpdateSuportRequest $request, Support $support)
     {
-        $data = $request->all();
+        $data = $request->Validated();
         $data['status'] = 'a'; 
 
         Support::create($data);
@@ -48,15 +49,13 @@ class SuportController extends Controller
         return view('admin/supports.edit', compact('support'));
     }
 
-    public function update(Request $request, Support $support, string $id)
+    public function update(StoreUpdateSuportRequest $request, Support $support, string $id)
     {
         if (!$support = $support->find($id)){
             return back();
         }
         
-       $support->update($request->only([
-        'subject', 'body'
-       ]));
+       $support->update($request->validated());
 
        return redirect()->route('supports.index');
     } 
