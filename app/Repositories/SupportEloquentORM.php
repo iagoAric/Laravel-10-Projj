@@ -1,14 +1,17 @@
 <?php
 
+namespace App\Repositories;
+
 use App\DTO\CreateSUpportDTO;
 use App\DTO\UpdateSupportDTO;
-use App\Models\support;
+use App\Models\Support;
 use App\Repositories\SupportRepositoryInterface;
+use stdClass;
 
 class SupportEloquentORM implements SupportRepositoryInterface
 {
     public function __construct(
-        protected support $model
+        protected Support  $model
     ){}
 
     public function getAll(string $filter = null): array
@@ -20,7 +23,7 @@ class SupportEloquentORM implements SupportRepositoryInterface
                             $query->orwhere('body', 'like', "%{$filter}%");
                         }
                     })
-                    ->all()
+                    ->get()
                     ->toArray();
                     
     }
