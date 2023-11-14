@@ -22,5 +22,6 @@
         </tr>
     
         @endforeach
+
     </tbody>
 </table>
