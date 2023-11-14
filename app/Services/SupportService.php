@@ -23,9 +23,9 @@ class SupportService
         return $this->repository->findOne($id);
     }
     
-    public function new(CreateSUpportDTO $dto): stdClass
+    public function new(CreateSupportDTO $dto): stdClass
     {
-        return $this->repository->new();
+        return $this->repository->new($dto);
     }
     public function update(UpdateSupportDTO $dto):stdClass|null
     {

@@ -14,4 +14,6 @@ class support extends Model
         'body',
         'status'
     ];
+
+    
 }

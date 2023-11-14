@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\DTO\{
-    CreateSUpportDTO,
+    CreateSupportDTO,
     UpdateSupportDTO
 };
 use stdClass;

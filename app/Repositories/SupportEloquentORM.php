@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\DTO\CreateSUpportDTO;
+use App\DTO\CreateSupportDTO;
 use App\DTO\UpdateSupportDTO;
 use App\Models\Support;
 use App\Repositories\SupportRepositoryInterface;
@@ -24,9 +24,9 @@ class SupportEloquentORM implements SupportRepositoryInterface
                         }
                     })
                     ->get()
-                    ->toArray();
-                    
+                    ->toArray();              
     }
+    
     public function findOne(string $id): stdClass|null
     {
         $support = $this->model->find($id);
@@ -36,11 +36,15 @@ class SupportEloquentORM implements SupportRepositoryInterface
 
             return (object) $support->toArray();
     }
+
+
     public function delete(string $id): void
     {
         $this->model->findOrFail($id)->delete();
     }
-    public function new(CreateSUpportDTO $dto): stdClass
+
+
+    public function new(CreateSupportDTO $dto): stdClass
     {
         $support = $this->model->create(
                 (array) $dto
@@ -48,6 +52,8 @@ class SupportEloquentORM implements SupportRepositoryInterface
             return (object) $support->toArray();
  
     }
+
+    
     public function update(UpdateSupportDTO $dto): stdClass|null
     {
         if (!$support = $this->model->find($dto->id)) {

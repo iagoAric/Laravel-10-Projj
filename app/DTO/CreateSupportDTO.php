@@ -3,7 +3,8 @@ namespace App\DTO;
 
 use App\Http\Requests\StoreUpdateSuportRequest;
 
-class CreateSUpportDTO
+class CreateSupportDTO
+
 {
     public function __construct(
         public string $subject,
@@ -12,10 +13,10 @@ class CreateSUpportDTO
     )
     {}
 
-    public function makeFromRequest(StoreUpdateSuportRequest $request): self
+    public static function makeFromRequest(StoreUpdateSuportRequest $request): self
     {
         return new self(
-            $this->subject,
+            $request->subject,
             'a',
             $request->body
         );

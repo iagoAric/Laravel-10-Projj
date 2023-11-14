@@ -21,7 +21,7 @@ class SuportController extends Controller
     public function index(Request $request)
     {
         $supports = $this->service->getall($request->filter);
-dd();
+
         return view('admin/supports/index', compact('supports'));
     
     }   
@@ -59,8 +59,8 @@ dd();
     public function update(StoreUpdateSuportRequest $request, Support $support, string $id)
     {
        $support = $this->service->update(
-            UpdateSupportDTO::makeFromRequest($request)
-        );
+            UpdateSupportDTO::makeFromRequest ($request)
+            );
         if (!$support){
             return back();
         }
