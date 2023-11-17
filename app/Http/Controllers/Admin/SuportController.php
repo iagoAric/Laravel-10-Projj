@@ -26,7 +26,9 @@ class SuportController extends Controller
             filter: $request->filter,
         );
 
-        return view('admin/supports/index', compact('supports'));
+        $filter = ['filter'=> $request->get('filter', '')];
+
+        return view('admin/supports/index', compact('supports', 'filter'));
     
     }   
     public function show(string $id)
