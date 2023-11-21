@@ -1,9 +1,11 @@
 <?php
 
+use App\Enums\SupportStatus;
 use App\Http\Controllers\Admin\SuportController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Site\SiteController;
 use Illuminate\Support\Facades\Route;
+
 
 Route::delete('/supports/{id}', [SuportController::class, 'destroy'])->name('supports.destroy');
 Route::put('/supports/{id}',[SuportController::class, 'update'])->name('supports.update');
