@@ -1,4 +1,8 @@
+@extends('admin.layout.app')
+
+@section('header')
 <h1>Novas Duvidas</h1>
+@endsection
 
 <x-alert/>
 

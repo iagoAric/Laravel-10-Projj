@@ -1,4 +1,8 @@
+@extends('admin.layout.app')
+
+@section('head')
 <h1>Detalhes da Duvida{{ $support->id}}</h1>
+@endsection
 
 <ul>
     <li>{{$support->subject}}</li>
