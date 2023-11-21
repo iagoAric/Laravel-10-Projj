@@ -11,74 +11,81 @@ use App\Services\SupportService;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 
-class SuportController extends Controller
-{
-    public function __construct(
-        protected SupportService $service
-    )
-    {}
-
-    public function index(Request $request)
+    class SuportController extends Controller
     {
-        $supports = $this->service->paginate(
-            page: $request->get('page', 1),
-            totalPerPage: $request->get('per_page', 15),
-            filter: $request->filter,
-        );
+        public function __construct(
+            protected SupportService $service
+        )
+        {}
 
-        $filter = ['filter'=> $request->get('filter', '')];
-
-        return view('admin/supports/index', compact('supports', 'filter'));
-    
-    }   
-    public function show(string $id)
-    {
-        if (!$support = $this->service->findOne($id)) {
-            return back();
-        }
-        return view('admin/supports/show', compact('support'));
-    }
-
-    public function create()
-
-    {
-        return view('admin/supports/create');
-    }
-
-    public function store(StoreUpdateSuportRequest $request, Support $support)
-    {
-        $this->service->new(
-            CreateSupportDTO::makeFromRequest($request)
-        );
-
-        return redirect()->route('supports.index');
-    }
-
-    public function edit(string $id)
-    {
-        if(!$support = $this->service->findOne($id) ){
-
-        }
-        return view('admin/supports.edit', compact('support'));
-    }
-
-    public function update(StoreUpdateSuportRequest $request, Support $support, string $id)
-    {
-       $support = $this->service->update(
-            UpdateSupportDTO::makeFromRequest ($request)
+        public function index(Request $request)
+        {
+            $supports = $this->service->paginate(
+                page: $request->get('page', 1),
+                totalPerPage: $request->get('per_page', 15),
+                filter: $request->filter,
             );
-        if (!$support){
-            return back();
+
+            $filter = ['filter'=> $request->get('filter', '')];
+
+            return view('admin/supports/index', compact('supports', 'filter'));
+        
+        }   
+        public function show(string $id)
+        {
+            if (!$support = $this->service->findOne($id)) {
+                return back();
+            }
+            return view('admin/supports/show', compact('support'));
         }
 
-       return redirect()->route('supports.index');
-    } 
+        public function create()
 
-    public function destroy(String  $id)
-    {
-        $this->service->delete($id);
+        {
+            return view('admin/supports/create');
+        }
 
-        return redirect()->route('supports.index');
+        public function store(StoreUpdateSuportRequest $request, Support $support)
+        {
+            $this->service->new(
+                CreateSupportDTO::makeFromRequest($request)
+            );
+
+            return redirect()->route('supports.index')
+                    ->route('supports.index')
+                    ->with('message', 'cadastrado com sucesso!');
+        }
+
+        public function edit(string $id)
+        {
+            if(!$support = $this->service->findOne($id) ){
+
+            }
+            return view('admin/supports.edit', compact('support'));
+        }
+
+        public function update(StoreUpdateSuportRequest $request, Support $support, string $id)
+        {
+        $support = $this->service->update(
+                UpdateSupportDTO::makeFromRequest ($request)
+                );
+            if (!$support){
+                return back();
+            }
+
+            return redirect()
+                ->route('supports.index')
+                ->with('message', 'atualizado  com sucesso!');
+        } 
+
+        public function destroy(String  $id)
+        {
+            $this->service->delete($id);
+
+            return redirect()
+                ->route('supports.index')
+                ->with('message', 'atualizado  com sucesso!');
+        }
+
+
     }
-
-}

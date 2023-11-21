@@ -1,18 +1,18 @@
-@extends('admin.layout.app')
+    @extends('admin.layout.app')
 
-@section('head')
-<h1>Detalhes da Duvida{{ $support->id}}</h1>
-@endsection
+    @section('header')
+    <h1>Detalhes da Duvida{{ $support->id}}</h1>
+    @endsection
 
-<ul>
-    <li>{{$support->subject}}</li>
-    <li>{{$support->status}}</li>
-    <li>{{$support->body}}</li>
+    <ul>
+        <li>{{$support->subject}}</li>
+        <li>{{$support->status}}</li>
+        <li>{{$support->body}}</li>
 
-</ul>
+    </ul>
 
-<form action="{{ route('supports.destroy', $support->id)}}" method="post">
-    @csrf
-    @method('DELETE')
-    <button type="submit">Deletar</button>
-</form>
+    <form action="{{ route('supports.destroy', $support->id)}}" method="post">
+        @csrf
+        @method('DELETE')
+        <button type="submit">Deletar</button>
+    </form>
